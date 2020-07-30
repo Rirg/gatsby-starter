@@ -1,22 +1,56 @@
 import React from "react"
-import { Link } from "gatsby"
-
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+import Container from "@material-ui/core/Container"
 
-export default IndexPage
+import * as S from "../styles/pages/index.styles"
+
+export const query = graphql`
+    {
+        allWpPage(filter: {isFrontPage: {eq: true}}) {
+            edges {
+                node {
+                    title
+                    content
+                    seo {
+                        canonical
+                        focuskw
+                        metaDesc
+                        metaKeywords
+                        metaRobotsNofollow
+                        metaRobotsNoindex
+                        opengraphAuthor
+                        opengraphDescription
+                        opengraphModifiedTime
+                        opengraphPublishedTime
+                        opengraphPublisher
+                        opengraphSiteName
+                        opengraphTitle
+                        opengraphType
+                        opengraphUrl
+                        title
+                        twitterDescription
+                        twitterTitle
+                    }
+                }
+            }
+        }
+    }
+`
+
+const Index = ({ data }) => {
+  //  TODO make sure you have a front-page set in WordPress or this will crash!
+  const pageData = data.allWpPage.edges[0].node
+  const { title, content } = pageData
+  return (
+    <Layout seo={pageData.seo}>
+      <Container>
+        <h1>{title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: content }}/>
+      </Container>
+    </Layout>
+  )
+}
+
+export default Index
