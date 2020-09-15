@@ -8,8 +8,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import SEO from "./seo"
-import Header from "./header"
+import SEO from "../components/seo/seo.component"
+import Header from "../components/header/header.component"
 import Theme from "./theme"
 import { AppContainer, GlobalStyles } from "../styles/pages/index.styles"
 
@@ -18,7 +18,9 @@ const Layout = ({ seo, children }) => {
   return (
     <Theme>
       <GlobalStyles/>
-      <SEO data={seo} />
+      {seo &&
+      <SEO data={seo}/>
+      }
       <Header />
       <AppContainer>
         <main>{children}</main>
