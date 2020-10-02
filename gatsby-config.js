@@ -1,5 +1,32 @@
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://www.name.com`
+  },
   plugins: [
+    `gatsby-plugin-sitemap`,
+    // Make sure this plugin is first in the array of plugins
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-111111111-1",
+        // this option places the tracking script into the head of the DOM
+        head: true,
+        // other options
+      },
+    },
+    `gatsby-plugin-netlify`,
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://www.name.com",
+        sitemap: "https://www.name.com/sitemap.xml",
+        policy: [{
+          userAgent: "*",
+          allow: "/",
+          //disallow: ["/support/cloud-agreement/", "support/cloud-agreement-may-2020"]
+        }]
+      }
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
