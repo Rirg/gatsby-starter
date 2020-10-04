@@ -10,7 +10,34 @@ require("dotenv").config({
 console.log(`This WordPress Endpoint is used: '${process.env.WORDPRESS_URL}'`)
 
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://www.domain.com`
+  },
   plugins: [
+    `gatsby-plugin-sitemap`,
+    // Make sure this plugin is first in the array of plugins
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-111111111-1",
+        // this option places the tracking script into the head of the DOM
+        head: true
+        // other options
+      }
+    },
+    `gatsby-plugin-netlify`,
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://www.name.com",
+        sitemap: "https://www.name.com/sitemap.xml",
+        policy: [{
+          userAgent: "*",
+          allow: "/"
+          //disallow: ["/support/cloud-agreement/", "support/cloud-agreement-may-2020"]
+        }]
+      }
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -40,8 +67,7 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: `transparent`,
-        theme_color: `#39C33A`,
-        display: `minimal-ui`
+        theme_color: `#39C33A`
         // icon: `src/assets/icons/short-logo.svg` // This path is relative to the root of the site.
       }
     },
@@ -57,9 +83,6 @@ module.exports = {
         url: `${process.env.WORDPRESS_URL}/graphql`
       }
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
 
     {
       resolve: "gatsby-plugin-react-svg",
