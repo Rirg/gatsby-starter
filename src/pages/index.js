@@ -5,46 +5,52 @@ import Container from "@material-ui/core/Container"
 
 import * as S from "../styles/pages/index.styles"
 
-export const query = graphql`
-    {
-        allWpPage(filter: {isFrontPage: {eq: true}}) {
-            edges {
-                node {
+export const query = graphql`query {
+    wpgraphql {
+        pages(
+            where: {
+                title: "Home"
+            }
+        ) {
+            nodes {
+                title
+                content
+                isFrontPage
+                seo {
+                    cornerstone
+                    canonical
                     title
-                    content
-                    seo {
-                        canonical
-                        focuskw
-                        metaDesc
-                        metaKeywords
-                        metaRobotsNofollow
-                        metaRobotsNoindex
-                        opengraphAuthor
-                        opengraphDescription
-                        opengraphModifiedTime
-                        opengraphPublishedTime
-                        opengraphPublisher
-                        opengraphSiteName
-                        opengraphTitle
-                        opengraphType
-                        opengraphUrl
-                        title
-                        twitterDescription
-                        twitterTitle
-                    }
+                    focuskw
+                    metaDesc
+                    metaKeywords
+                    metaRobotsNofollow
+                    metaRobotsNoindex
+                    opengraphAuthor
+                    opengraphDescription
+                    opengraphModifiedTime
+                    opengraphPublishedTime
+                    opengraphPublisher
+                    opengraphSiteName
+                    opengraphTitle
+                    opengraphType
+                    opengraphUrl
+                    twitterDescription
+                    twitterTitle
                 }
+                id
+                uri
             }
         }
     }
+}
 `
 
 const Index = ({ data }) => {
   //  TODO make sure you have a front-page set in WordPress or this will crash!
-  // const pageData = data.allWpPage.edges[0].node
-  // const { title, content } = pageData
+  const pageData = data.wpgraphql.pages.nodes[0]
+  const { seo, title, content } = pageData
   return (
-    // <Layout seo={pageData.seo}>
-    <Layout seo={null}>
+    <Layout seo={seo}>
       <Container>
         <h1>Title here</h1>
       </Container>

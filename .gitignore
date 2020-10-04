@@ -53,8 +53,9 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files
-.env*
+# ignore dev and local .env
+.env.development
+.env.local
 
 # gatsby files
 .cache/
