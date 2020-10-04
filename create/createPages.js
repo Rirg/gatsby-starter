@@ -154,7 +154,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         path: pagePath,
         component: pageTemplate,
         context: {
-          page: page,
+          data: page,
         },
       })
 
