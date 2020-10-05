@@ -14,14 +14,15 @@ function SEO({ data, meta }) {
   if (!data) return null;
 
   const {
-    yoast_wpseo_metadesc,
-    yoast_wpseo_title,
-    yoast_wpseo_canonical,
+    metaDesc,
+    title,
+    canonical,
     metaRobotsNofollow,
     opengraphSiteName,
     opengraphDescription,
-    yoast_wpseo_twitter_description,
-    yoast_wpseo_twitter_title,
+    twitterDescription,
+    twitterTitle,
+    opengraphTitle,
     opengraphModifiedTime,
     metaRobotsNoindex,
     focusKw,
@@ -34,10 +35,10 @@ function SEO({ data, meta }) {
       htmlAttributes={{
         lang: "EN"
       }}
-      title={yoast_wpseo_title}
+      title={title}
       link={[{
         rel: "canonical",
-        href: yoast_wpseo_canonical
+        href: canonical
       }]}
       // titleTemplate={`%s | ${title}`}
       meta={[
@@ -47,24 +48,24 @@ function SEO({ data, meta }) {
         },
         {
           name: `description`,
-          content: yoast_wpseo_metadesc
+          content: metaDesc
         },
         {
           property: `og:title`,
-          content: yoast_wpseo_title
+          content: opengraphTitle
         },
-        // {
-        //   property: `og:site_name`,
-        //   content: opengraphSiteName
-        // },
-        // {
-        //   property: `og:modified_time`,
-        //   content: opengraphModifiedTime
-        // },
-        // {
-        //   property: `og:description`,
-        //   content: opengraphDescription
-        // },
+        {
+          property: `og:site_name`,
+          content: opengraphSiteName
+        },
+        {
+          property: `og:modified_time`,
+          content: opengraphModifiedTime
+        },
+        {
+          property: `og:description`,
+          content: opengraphDescription
+        },
         {
           property: `og:type`,
           content: `website`
@@ -75,15 +76,15 @@ function SEO({ data, meta }) {
         },
         {
           name: `twitter:creator`,
-          content: yoast_wpseo_title
+          content: twitterTitle
         },
         {
           name: `twitter:title`,
-          content: yoast_wpseo_twitter_title
+          content: twitterTitle
         },
         {
           name: `twitter:description`,
-          content: yoast_wpseo_twitter_description
+          content: twitterDescription
         }
       ].concat[meta]}
     />
