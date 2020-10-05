@@ -46,6 +46,11 @@ const GET_PAGES = `
                       metaRobotsNoindex
                       opengraphAuthor
                       opengraphDescription
+                       opengraphImage {
+                        altText
+                        sourceUrl
+                        title
+                      }
                       opengraphModifiedTime
                       opengraphPublishedTime
                       opengraphPublisher
@@ -55,6 +60,11 @@ const GET_PAGES = `
                       opengraphUrl
                       twitterDescription
                       twitterTitle
+                      twitterImage {
+                        altText
+                        sourceUrl
+                        title
+                      }
                     }
                     id
                     uri

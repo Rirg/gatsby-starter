@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet"
 
 function SEO({ data, meta }) {
 
-  if (!data) return null;
+  if (!data) return null
 
   const {
     metaDesc,
@@ -22,77 +22,88 @@ function SEO({ data, meta }) {
     opengraphDescription,
     twitterDescription,
     twitterTitle,
+    twitterImage,
     opengraphTitle,
+    opengraphImage,
+    opengraphUrl,
+    opengraphType,
     opengraphModifiedTime,
     metaRobotsNoindex,
+    opengraphAuthor,
     focusKw,
     metaKeyWords,
     openGraphAuthor
   } = data
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang: "EN"
-      }}
-      title={title}
-      link={[{
-        rel: "canonical",
-        href: canonical
-      }]}
-      // titleTemplate={`%s | ${title}`}
-      meta={[
-        {
-          name: `robots`,
-          content: `${metaRobotsNoindex}, ${metaRobotsNofollow}`
-        },
-        {
-          name: `description`,
-          content: metaDesc
-        },
-        {
-          property: `og:title`,
-          content: opengraphTitle
-        },
-        {
-          property: `og:site_name`,
-          content: opengraphSiteName
-        },
-        {
-          property: `og:modified_time`,
-          content: opengraphModifiedTime
-        },
-        {
-          property: `og:description`,
-          content: opengraphDescription
-        },
-        {
-          property: `og:type`,
-          content: `website`
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`
-        },
-        {
-          name: `twitter:creator`,
-          content: twitterTitle
-        },
-        {
-          name: `twitter:title`,
-          content: twitterTitle
-        },
-        {
-          name: `twitter:description`,
-          content: twitterDescription
-        }
-      ].concat[meta]}
-    />
+    <Helmet>
+      {title &&
+      <title>{title}</title>
+      }
+
+      {/* General tags */}
+      {metaDesc &&
+      <meta name="description" content={metaDesc}/>
+      }
+
+      {metaRobotsNoindex || metaRobotsNofollow &&
+      <meta name='robots' content={`${metaRobotsNoindex}, ${metaRobotsNofollow}`}/>
+      }
+
+      {canonical &&
+      <link rel="canonical" href={canonical}/>
+      }
+
+      {/* OpenGraph tags */}
+
+      {opengraphUrl &&
+      <meta property="og:url" content={opengraphUrl}/>
+      }
+
+      {opengraphTitle &&
+      <meta property="og:title" content={opengraphTitle}/>
+      }
+
+      {opengraphDescription &&
+      <meta property="og:description" content={opengraphDescription}/>
+      }
+
+      {opengraphType &&
+      <meta property="og:type" content={opengraphType}/>
+      }
+
+      {opengraphSiteName &&
+      <meta property="og:site_name" content={opengraphSiteName}/>
+      }
+
+
+      {opengraphImage &&
+      <meta property="og:image" content={opengraphImage.sourceUrl}/>
+      }
+
+      {opengraphAuthor &&
+      <meta property="og:author" content={openGraphAuthor}/>
+      }
+
+      {/* Twitter Card tags */}
+
+      {twitterTitle &&
+      <meta name="twitter:title" content={title}/>
+      }
+
+      {twitterDescription &&
+      <meta name="twitter:description" content={twitterDescription}/>
+      }
+
+      {twitterImage &&
+      <meta name="twitter:image" content={twitterImage.sourceUrl}/>
+      }
+    </Helmet>
   )
 }
 
 SEO.defaultProps = {
-  meta: [],
+  meta: []
 }
 
 SEO.propTypes = {

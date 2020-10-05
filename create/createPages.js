@@ -47,6 +47,11 @@ const GET_PAGES = `
                       opengraphAuthor
                       opengraphDescription
                       opengraphModifiedTime
+                      opengraphImage {
+                        altText
+                        sourceUrl
+                        title
+                      }
                       opengraphPublishedTime
                       opengraphPublisher
                       opengraphSiteName
@@ -55,6 +60,11 @@ const GET_PAGES = `
                       opengraphUrl
                       twitterDescription
                       twitterTitle
+                      twitterImage {
+                        altText
+                        sourceUrl
+                        title
+                      }
                     }
                     id
                     uri
