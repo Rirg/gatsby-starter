@@ -1,4 +1,4 @@
-const postTemplate = require.resolve("../src/templates/post/post.component.jsx")
+const postTemplate = require.resolve("../src/templates/post/post.template.jsx")
 
 const GET_PAGES = `
     query GET_POSTS($first:Int $after:String) {

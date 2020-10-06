@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../../components/layout"
 
-const PageComponent = ({pageContext: {data}}) => {
+const Page = ({pageContext: {data}}) => {
   const {seo, title} = data
   return (
     <Layout seo={seo}>
@@ -10,4 +10,4 @@ const PageComponent = ({pageContext: {data}}) => {
   )
 }
 
-export default PageComponent;
+export default Page;

@@ -47,10 +47,10 @@ export const query = graphql`query {
 
 const Index = ({ data }) => {
   //  TODO make sure you have a front-page set in WordPress or this will crash!
-  const pageData = data.wpgraphql.pages.nodes[0]
-  const { seo, title, content } = pageData
+  // const pageData = data.wpgraphql.pages.nodes[0]
+  // const { seo, title, content } = pageData
   return (
-    <Layout seo={seo}>
+    <Layout seo={{ title: "Page Title" }}>
       <Container>
         <h1>Title here</h1>
       </Container>

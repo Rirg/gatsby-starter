@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../../components/layout"
 import Img from "gatsby-image"
 
-const PostComponent = ({pageContext: {data}}) => {
+const Post = ({pageContext: {data}}) => {
   const {seo, title, content, featuredImage} = data
   return (
     <Layout seo={seo}>
@@ -13,4 +13,4 @@ const PostComponent = ({pageContext: {data}}) => {
   )
 }
 
-export default PostComponent;
+export default Post;

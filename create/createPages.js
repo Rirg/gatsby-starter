@@ -1,4 +1,4 @@
-const pageTemplate = require.resolve('../src/templates/page/page.component.jsx');
+const pageTemplate = require.resolve('../src/templates/page/page.template.jsx');
 
 const GET_PAGES = `
     query GET_PAGES($first:Int $after:String) {
