@@ -58,6 +58,9 @@ const Theme = ({ children }) => {
         disabled: "#10355A",
         hint: "#10355A"
       }
+    },
+    typography: {
+      "fontFamily": `"Roboto", "Open Sans", "Arial", sans-serif`
     }
   })
 
