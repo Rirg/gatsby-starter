@@ -12,6 +12,7 @@ import SEO from "../components/seo/seo.component"
 import Header from "../components/header/header.component"
 import Theme from "./theme"
 import { AppContainer, GlobalStyles } from "../styles/pages/index.styles"
+import Footer from "./footer/footer.component"
 
 const Layout = ({ seo, children }) => {
 
@@ -23,10 +24,9 @@ const Layout = ({ seo, children }) => {
       }
       <Header />
       <AppContainer>
-        <main>{children}</main>
-        <footer>
-        </footer>
+        {children}
       </AppContainer>
+      <Footer />
     </Theme>
   )
 }
