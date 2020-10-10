@@ -52,7 +52,7 @@ const Index = ({ data }) => {
   return (
     <Layout seo={{ title: "Page Title" }}>
       <Container>
-        <h1>Title here</h1>
+        <h1>Hello World</h1>
       </Container>
     </Layout>
   )
