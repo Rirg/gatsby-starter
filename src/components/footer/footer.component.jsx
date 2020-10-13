@@ -2,9 +2,9 @@ import React from "react"
 
 import * as S from "./footer.styles"
 
-const Footer = () => {
+const Footer = ({className}) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper className={className}>
       <div>Footer here</div>
     </S.Wrapper>
   )

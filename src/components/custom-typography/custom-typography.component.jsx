@@ -1,24 +1,25 @@
 import React from "react"
-import * as S from "./section-title.styles.jsx"
+import * as S from "./custom-typography.styles.jsx"
 import PropTypes from "prop-types"
 
-const SectionTitle = ({ children, style, mb, mt, pb, pt, mw, className, fontSize, colorInherit }) => (
-  <S.CustomTitle
+const CustomTypography = ({ children, component, className, style, mb, mt, pb, pt, mw, fontSize, colorInherit, color }) => (
+  <S.Text
+    component={component}
     className={className}
     style={style}
+    mw={mw}
     mb={mb}
     mt={mt}
-    mw={mw}
     pt={pt}
     pb={pb}
+    color={color}
     fontSize={fontSize}
     colorInherit={colorInherit}>
     {children}
-  </S.CustomTitle>
+  </S.Text>
 )
 
-
-SectionTitle.propTypes = {
+CustomTypography.propTypes = {
   children: PropTypes.node.isRequired,
   style: PropTypes.object,
   mb: PropTypes.number,
@@ -30,5 +31,4 @@ SectionTitle.propTypes = {
   colorInherit: PropTypes.bool
 }
 
-
-export default SectionTitle
+export default CustomTypography
