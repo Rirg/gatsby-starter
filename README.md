@@ -8,6 +8,7 @@
 
     ```shell
     cd my-default-starter/
+    npm install
     gatsby develop
     ```
 
@@ -22,10 +23,11 @@
 ## Libraries
 
 1.  **`material-ui`**: CSS framework
-2.  **`gatsby-image`**: Handle lazy loading / resize images - etc.
+2.  **`gatsby-image`**: Handle lazy loading / resize images / WebP - etc.
+2.  **`gatsby-background-image`**: Handle lazy loading / resize images / WebP (backgrounds)  - etc.
 3.  **`gatsby-pagination`**: Handle pagination
 4.  **`styled-components`**: CSS-in-JS
-5.  **`react-modal-video`**
-6.  **`react-slick`**: Carousel
+5.  **`react-modal-video`** Open YouTube - Vimeo or local videos in a modal - popup
+6.  **`react-slick`**: Carousel - Slider
 
 <!-- AUTO-GENERATED-CONTENT:END -->
