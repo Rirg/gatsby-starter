@@ -1,7 +1,7 @@
 import React from "react"
 import BackgroundImage from "gatsby-background-image"
 
-const SectionImg = ({ img, className, fallback, children }) => {
+const FluidBgImg = ({ img, tag = "section", className, fallback, children }) => {
   let imageFile = ""
   if (img && img.imageFile) {
     imageFile = img.imageFile.childImageSharp
@@ -16,13 +16,13 @@ const SectionImg = ({ img, className, fallback, children }) => {
   }
 
   if (!imageFile && !img) {
-    return null
+    return <section>{children}</section>
   }
 
   if (imageFile) {
     return (
       <BackgroundImage
-        Tag='section'
+        Tag={tag}
         className={className}
         fluid={imageFile.fluid}
       >
@@ -33,11 +33,16 @@ const SectionImg = ({ img, className, fallback, children }) => {
 
   return (
     <section
-      style={{ background: `url(${img.sourceUrl}) no-repeat center center`, backgroundSize: "cover" }}
+      style={{
+        backgroundImage: `url(${img.sourceUrl})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "center",
+        backgroundPosition: "center"
+      }}
       className={className}
     >
       {children}
     </section>
   )
 }
-export default SectionImg
+export default FluidBgImg
