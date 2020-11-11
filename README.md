@@ -4,6 +4,8 @@
 
 1.  **Start developing.**
 
+    Create a file in the root called `.env.development`!!!    
+    
     Navigate into your new site’s directory and start it up.
 
     ```shell
@@ -11,7 +13,7 @@
     npm install
     gatsby develop
     ```
-
+   
 1.  **Open the source code and start editing**
 
     Your site is now running at `http://localhost:8000`!
