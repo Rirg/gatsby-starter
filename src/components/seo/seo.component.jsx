@@ -39,7 +39,7 @@ function SEO({ data, meta }) {
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "url": "https://unanet.com",
+      "url": "https://DOMAIN-NAME.com",
       name: title,
       description: opengraphDescription
     }
