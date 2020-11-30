@@ -31,11 +31,21 @@ module.exports = {
       options: {
         host: "https://www.name.com",
         sitemap: "https://www.name.com/sitemap.xml",
-        policy: [{
-          userAgent: "*",
-          allow: "/"
-          //disallow: ["/support/cloud-agreement/", "support/cloud-agreement-may-2020"]
-        }]
+        env: {
+          development: {
+            policy: [{
+              userAgent: "*",
+              disallow: ["/"]
+            }]
+          },
+          production: {
+            policy: [{
+              userAgent: "*",
+              allow: "/",
+              // disallow: ["/support/cloud-agreement/", "support/cloud-agreement-may-2020", "/thank-you"]
+            }]
+          }
+        }
       }
     },
     `gatsby-plugin-react-helmet`,
