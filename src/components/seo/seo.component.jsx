@@ -35,8 +35,20 @@ function SEO({ data, meta }) {
     openGraphAuthor
   } = data
 
+  const schemaOrgJSONLD =
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://DOMAIN-NAME.com",
+      name: title,
+      description: opengraphDescription
+    }
+
   return (
     <Helmet>
+      <script type="application/ld+json">
+        {JSON.stringify(schemaOrgJSONLD)}
+      </script>
       {title &&
       <title>{title}</title>
       }
