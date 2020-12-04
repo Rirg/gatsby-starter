@@ -54,6 +54,6 @@ exports.createPagesStatefully = async ({ graphql, actions, reporter }, options) 
   //   createRedirect(redirect)
   // })
 
-  await createPages({ actions, graphql, reporter }, options)
+  // await createPages({ actions, graphql, reporter }, options)
   // await createPosts({ actions, graphql, reporter }, options)
 }
