@@ -1,6 +1,18 @@
-const pageTemplate = require.resolve('../src/templates/page/page.template.jsx');
+const { FluidImageFragment } = require("../src/templates/fragments")
+const { PageTemplateFragment } = require("../src/templates/page/page.data")
 
-const GET_PAGES = `
+const _uniqBy = require("lodash.uniqby")
+const _isEmpty = require("lodash.isempty")
+
+const { getAllLayoutsData, createTemplate, createPageWithTemplate } = require("./utils")
+
+const filePathToComponents = "../src/layouts/"
+const templateCacheFolder = ".template-cache"
+const layoutMapping = require("./layouts")
+const pageTemplate = require.resolve("../src/templates/page/page.template.js")
+// ${FluidImageFragment}
+const GET_PAGES = (layouts) => `
+    ${PageTemplateFragment(layouts)}
     query GET_PAGES($first:Int $after:String) {
         wpgraphql {
             pages(
@@ -15,59 +27,8 @@ const GET_PAGES = `
                     hasNextPage
                     endCursor
                 }
-                nodes {                
-                    title
-                    content
-                    isFrontPage
-                    featuredImage {
-                      node {
-                        sourceUrl
-                        imageFile {
-                          childImageSharp {
-                            fluid(maxWidth: 1200) {
-                              base64
-                              aspectRatio
-                              src
-                              srcSet
-                              sizes
-                            }
-                          }
-                        }
-                      }
-                    }
-                    seo {
-                      cornerstone
-                      canonical
-                      title
-                      focuskw
-                      metaDesc
-                      metaKeywords
-                      metaRobotsNofollow
-                      metaRobotsNoindex
-                      opengraphAuthor
-                      opengraphDescription
-                      opengraphModifiedTime
-                      opengraphImage {
-                        altText
-                        sourceUrl
-                        title
-                      }
-                      opengraphPublishedTime
-                      opengraphPublisher
-                      opengraphSiteName
-                      opengraphTitle
-                      opengraphType
-                      opengraphUrl
-                      twitterDescription
-                      twitterTitle
-                      twitterImage {
-                        altText
-                        sourceUrl
-                        title
-                      }
-                    }
-                    id
-                    uri
+                nodes {
+                  ...PageTemplateFragment
                 }
             }
         }
@@ -87,6 +48,11 @@ const itemsPerPage = 10
 module.exports = async ({ actions, graphql, reporter }, options) => {
 
   /**
+   * Get all layouts data as a concatenated string
+   */
+  const layoutsData = getAllLayoutsData()
+
+  /**
    * This is the method from Gatsby that we're going
    * to use to create pages in our static site.
    */
@@ -104,7 +70,8 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     /**
      * Fetch pages using the GET_PAGES query and the variables passed in.
      */
-    await graphql(GET_PAGES, variables).then(({ data }) => {
+    await graphql(GET_PAGES(layoutsData), variables).then(({ data }) => {
+
       /**
        * Extract the data from the GraphQL query results
        */
@@ -112,9 +79,9 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         wpgraphql: {
           pages: {
             nodes,
-            pageInfo: { hasNextPage, endCursor },
-          },
-        },
+            pageInfo: { hasNextPage, endCursor }
+          }
+        }
       } = data
 
       /**
@@ -152,23 +119,56 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     wpPages && wpPages.map((page) => {
       let pagePath = `${page.uri}`
 
+      // Exclude hardcoded pages
+      if (pagePath === "/components/") return
+
       /**
        * If the page is the front page, the page path should not be the uri,
        * but the root path '/'.
        */
-      if(page.isFrontPage) {
-        pagePath = '/'
+      if (page.isFrontPage) {
+        pagePath = "/"
       }
 
-      createPage({
-        path: pagePath,
-        component: pageTemplate,
-        context: {
-          data: page,
-        },
+      /**
+       * Filter out empty objects. This can happen, if for some reason you
+       * don't query for a specific layout (UnionType), that is potentially
+       * there.
+       */
+      const layouts = page.pageBuilder.layouts.filter(el => {
+        return !_isEmpty(el)
       })
 
-      reporter.info(`page created: ${page.uri}`)
+      let mappedLayouts = []
+
+      if (layouts && layouts.length > 0) {
+        /**
+         * Removes all duplicates, as we only need to import each layout once
+         */
+        const UniqueLayouts = _uniqBy(layouts, "fieldGroupName")
+
+        /**
+         * Maps data and prepares object for our template generation.
+         */
+        mappedLayouts = UniqueLayouts.map((layout) => {
+          return {
+            layoutType: layout.fieldGroupName,
+            componentName: layoutMapping[layout.fieldGroupName],
+            filePath: `${filePathToComponents + layoutMapping[layout.fieldGroupName]}/`
+          }
+        })
+      }
+
+      createPageWithTemplate({
+        createTemplate: createTemplate,
+        templateCacheFolder: templateCacheFolder,
+        pageTemplate: pageTemplate,
+        page: page,
+        pagePath: pagePath,
+        mappedLayouts: mappedLayouts,
+        createPage: createPage,
+        reporter: reporter
+      })
     })
 
     reporter.info(`# -----> PAGES TOTAL: ${wpPages.length}`)
