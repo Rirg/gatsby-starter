@@ -1,25 +1,23 @@
 import React from "react"
-import { Link } from "gatsby"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
 import PropTypes from "prop-types"
+import * as S from "./custom-link.styles"
 
-const TransitionLink = ({ url, children, className }) => (
+const CustomLink = ({ url, children, className }) => (
   // <AniLink
   //   className={className}
   //   fade to={url}
   //   style={{textDecoration: 'none', color: '#10365A'}}>
   //   {children}
   // </AniLink>
-  <Link
+  <S.CustomLink
     className={className}
-    style={{ textDecoration: "none", color: "#10365A" }}
     to={url}>
     {children}
-  </Link>
+  </S.CustomLink>
 )
 
-TransitionLink.propTypes = {
+CustomLink.propTypes = {
   url: PropTypes.string.isRequired
 }
 
-export default TransitionLink
+export default CustomLink

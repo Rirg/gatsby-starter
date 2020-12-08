@@ -1,8 +1,4 @@
 import styled from "styled-components"
-import Grid from "@material-ui/core/Grid"
-import { Typography } from "@material-ui/core"
-import IconButton from "@material-ui/core/IconButton"
-import TransitionLink from "../transition-link/transition-link.component"
 
 export const Wrapper = styled.footer`
   color: white;
