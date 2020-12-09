@@ -47,7 +47,7 @@
                                 "label": "Container max-width",
                                 "name": "container_max-width",
                                 "type": "select",
-                                "instructions": "sm : Small\r\nmd : Medium\r\nlg : Large\r\nxl : Extra-Large\r\nfalse : No Max Width",
+                                "instructions": "",
                                 "required": 0,
                                 "conditional_logic": 0,
                                 "wrapper": {
@@ -55,8 +55,14 @@
                                     "class": "",
                                     "id": ""
                                 },
-                                "choices": [],
-                                "default_value": false,
+                                "choices": {
+                                    "sm": "Small",
+                                    "md": "Medium",
+                                    "lg": "Large",
+                                    "xl": "Extra-Large",
+                                    "false": "No Max Width"
+                                },
+                                "default_value": "md",
                                 "allow_null": 0,
                                 "multiple": 0,
                                 "ui": 0,
@@ -69,7 +75,7 @@
                         "max": ""
                     }
                 },
-                "button_label": "Add Row",
+                "button_label": "Add Layout",
                 "min": "",
                 "max": ""
             },
@@ -147,8 +153,6 @@
             "the_content"
         ],
         "active": true,
-        "description": "",
-        "show_in_graphql": 1,
-        "graphql_field_name": "pageBuilder"
+        "description": ""
     }
 ]
