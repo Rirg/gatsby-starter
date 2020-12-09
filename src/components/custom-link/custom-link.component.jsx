@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import * as S from "./custom-link.styles"
 
-const CustomLink = ({ url, children, className }) => (
+const CustomLink = ({ url, children, target, className }) => (
   // <AniLink
   //   className={className}
   //   fade to={url}
@@ -10,6 +10,7 @@ const CustomLink = ({ url, children, className }) => (
   //   {children}
   // </AniLink>
   <S.CustomLink
+    target={target}
     className={className}
     to={url}>
     {children}
