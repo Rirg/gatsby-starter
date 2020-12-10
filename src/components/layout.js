@@ -19,14 +19,14 @@ const Layout = ({ seo, children }) => {
   return (
     <Theme>
       <GlobalStyles/>
-      {seo &&
-      <SEO data={seo}/>
-      }
-      <Header />
+      {seo && (
+        <SEO data={seo}/>
+      )}
+      <Header/>
       <AppContainer>
         {children}
       </AppContainer>
-      <Footer />
+      <Footer/>
     </Theme>
   )
 }
