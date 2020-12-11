@@ -15,15 +15,16 @@ const Theme = ({ children }) => {
   const matchesLg = useMediaQuery(defaultTheme.breakpoints.up("lg"))
   const spacing = matchesLg ? 16 : matchesMd ? 8 : matchesSm ? 8 : 0
 
-  let navHeight = "59px"
+  // Nav height in pixels
+  let navHeight = 59
   let sectionPadding = "padding-top: 1.5em; padding-bottom: 1.5em;"
 
   if (matchesMd) {
-    navHeight = "77px"
+    navHeight = 77
     sectionPadding = "padding-top: 5em; padding-bottom: 5em;"
   }
   if (matchesLg) {
-    navHeight = "77px"
+    navHeight = 77
   }
 
   const theme = createMuiTheme({
