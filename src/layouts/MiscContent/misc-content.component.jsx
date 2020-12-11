@@ -3,7 +3,7 @@ import * as S from "./misc-content.styles.jsx"
 
 const MiscContent = ({ containerMaxWidth, content }) => {
   const parse = require("html-react-parser")
-  if (!content) return  null
+  if (!content) return null
   return (
     <S.Wrapper maxWidth={containerMaxWidth ? containerMaxWidth : false}>
       {parse(content)}

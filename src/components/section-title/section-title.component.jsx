@@ -2,7 +2,18 @@ import React from "react"
 import * as S from "./section-title.styles.jsx"
 import PropTypes from "prop-types"
 
-const SectionTitle = ({ children, style, mb, mt, pb, pt, mw, className, fontSize, colorInherit }) => (
+const SectionTitle = ({
+  children,
+  style,
+  mb,
+  mt,
+  pb,
+  pt,
+  mw,
+  className,
+  fontSize,
+  colorInherit,
+}) => (
   <S.CustomTitle
     className={className}
     style={style}
@@ -12,11 +23,11 @@ const SectionTitle = ({ children, style, mb, mt, pb, pt, mw, className, fontSize
     pt={pt}
     pb={pb}
     fontSize={fontSize}
-    colorInherit={colorInherit}>
+    colorInherit={colorInherit}
+  >
     {children}
   </S.CustomTitle>
 )
-
 
 SectionTitle.propTypes = {
   children: PropTypes.node.isRequired,
@@ -27,8 +38,7 @@ SectionTitle.propTypes = {
   pb: PropTypes.number,
   mw: PropTypes.number,
   fontSize: PropTypes.number,
-  colorInherit: PropTypes.bool
+  colorInherit: PropTypes.bool,
 }
-
 
 export default SectionTitle

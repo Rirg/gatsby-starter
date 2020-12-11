@@ -2,7 +2,7 @@ import React from "react"
 
 import * as S from "./footer.styles"
 
-const Footer = ({className}) => {
+const Footer = ({ className }) => {
   return (
     <S.Wrapper className={className}>
       <div>Footer here</div>

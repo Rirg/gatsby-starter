@@ -9,16 +9,13 @@ const CustomLink = ({ url, children, target, className }) => (
   //   style={{textDecoration: 'none', color: '#10365A'}}>
   //   {children}
   // </AniLink>
-  <S.CustomLink
-    target={target}
-    className={className}
-    to={url}>
+  <S.CustomLink target={target} className={className} to={url}>
     {children}
   </S.CustomLink>
 )
 
 CustomLink.propTypes = {
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
 }
 
 export default CustomLink

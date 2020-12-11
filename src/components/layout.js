@@ -15,24 +15,19 @@ import { AppContainer, GlobalStyles } from "../styles/pages/index.styles"
 import Footer from "./footer/footer.component"
 
 const Layout = ({ seo, children }) => {
-
   return (
     <Theme>
-      <GlobalStyles/>
-      {seo && (
-        <SEO data={seo}/>
-      )}
-      <Header/>
-      <AppContainer>
-        {children}
-      </AppContainer>
-      <Footer/>
+      <GlobalStyles />
+      {seo && <SEO data={seo} />}
+      <Header />
+      <AppContainer>{children}</AppContainer>
+      <Footer />
     </Theme>
   )
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout

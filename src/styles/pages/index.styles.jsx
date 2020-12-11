@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import {createGlobalStyle} from "styled-components";
+import styled from "styled-components"
+import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyles = createGlobalStyle`
   body {
-    font-family:${({theme}) => theme.fonts.primaryFont};
+    font-family:${({ theme }) => theme.fonts.primaryFont};
     // Remove default behaviour from MUI when opening menu
     //overflow: unset !important;
     //padding: 0 !important;
@@ -27,7 +27,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   h1, h2, h3, h4 {
-       font-family:${({theme}) => theme.fonts.secondaryFont};
+       font-family:${({ theme }) => theme.fonts.secondaryFont};
        margin: 0;
   }
   
@@ -151,10 +151,10 @@ export const GlobalStyles = createGlobalStyle`
 `
 
 export const AppContainer = styled.main`
-   position: relative;
-   display: flex;
-   flex: 1;
-   flex-direction: column;
-   padding-top: ${({theme}) => theme.navHeight};
-   background-color: #F8FDFF;
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-top: ${({ theme }) => theme.navHeight};
+  background-color: #f8fdff;
 `

@@ -7,7 +7,7 @@ module.exports.getAllLayoutsData = () => {
 
   const fileArray = glob.sync("./src/layouts/**/*.data.js")
 
-  fileArray.forEach(function(file) {
+  fileArray.forEach(function (file) {
     let queryString = require(path.resolve(file))
     allLayoutsString = allLayoutsString + " \n " + queryString()
   })
@@ -24,18 +24,26 @@ module.exports.getAllLayoutsData = () => {
  * @param {object[]} imports - An array of objects, that define the layoutType, componentName and filePath.
  * @returns {Promise<>}
  */
-module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templateName, imports }) => {
-  return new Promise((resolve) => {
+module.exports.createTemplate = ({
+  templateCacheFolderPath,
+  templatePath,
+  templateName,
+  imports,
+}) => {
+  return new Promise(resolve => {
     const fs = require("fs")
 
     const template = require(templatePath)
     const contents = template(imports)
 
-    fs.mkdir(templateCacheFolderPath, { recursive: true }, (err) => {
+    fs.mkdir(templateCacheFolderPath, { recursive: true }, err => {
       if (err) throw "Error creating template-cache folder: " + err
 
-
-      const filePath = templateCacheFolderPath + "/" + ((templateName === "/" || templateName === "") ? "home" : templateName) + ".js"
+      const filePath =
+        templateCacheFolderPath +
+        "/" +
+        (templateName === "/" || templateName === "" ? "home" : templateName) +
+        ".js"
 
       fs.writeFile(filePath, contents, "utf8", err => {
         if (err) throw "Error writing " + templateName + " template: " + err
@@ -50,24 +58,33 @@ module.exports.createTemplate = ({ templateCacheFolderPath, templatePath, templa
 /**
  * Creates pages out of the temporary created templates.
  */
-module.exports.createPageWithTemplate = ({ createTemplate, templateCacheFolder, pageTemplate, page, pagePath, mappedLayouts, createPage, reporter }) => {
+module.exports.createPageWithTemplate = ({
+  createTemplate,
+  templateCacheFolder,
+  pageTemplate,
+  page,
+  pagePath,
+  mappedLayouts,
+  createPage,
+  reporter,
+}) => {
   /**
    * First we create a new template file for each page.
    */
-  createTemplate(
-    {
-      templateCacheFolderPath: templateCacheFolder,
-      templatePath: pageTemplate,
-      templateName: "tmp-" + page.slug,
-      imports: mappedLayouts,
-    }).then(() => {
-
+  createTemplate({
+    templateCacheFolderPath: templateCacheFolder,
+    templatePath: pageTemplate,
+    templateName: "tmp-" + page.slug,
+    imports: mappedLayouts,
+  }).then(() => {
     /**
      * Then, we create a gatsby page with the just created template file.
      */
     createPage({
       path: pagePath,
-      component: path.resolve(templateCacheFolder + "/" + "tmp-" + page.slug + ".js"),
+      component: path.resolve(
+        templateCacheFolder + "/" + "tmp-" + page.slug + ".js"
+      ),
       context: {
         page: page,
       },

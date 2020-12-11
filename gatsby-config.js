@@ -4,14 +4,14 @@ let activeEnv =
 console.log(`Using environment config: '${activeEnv}'`)
 
 require("dotenv").config({
-  path: `.env.${activeEnv}`
+  path: `.env.${activeEnv}`,
 })
 
 console.log(`This WordPress Endpoint is used: '${process.env.WORDPRESS_URL}'`)
 
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://www.domain.com`
+    siteUrl: `https://www.domain.com`,
   },
   plugins: [
     `gatsby-plugin-sitemap`,
@@ -21,9 +21,9 @@ module.exports = {
       options: {
         trackingId: "UA-111111111-1",
         // this option places the tracking script into the head of the DOM
-        head: true
+        head: true,
         // other options
-      }
+      },
     },
     `gatsby-plugin-netlify`,
     {
@@ -33,28 +33,32 @@ module.exports = {
         sitemap: "https://www.domain.com/sitemap.xml",
         env: {
           development: {
-            policy: [{
-              userAgent: "*",
-              disallow: ["/"]
-            }]
+            policy: [
+              {
+                userAgent: "*",
+                disallow: ["/"],
+              },
+            ],
           },
           production: {
-            policy: [{
-              userAgent: "*",
-              allow: "/",
-              // disallow: ["/support/cloud-agreement/", "support/cloud-agreement-may-2020", "/thank-you"]
-            }]
-          }
-        }
-      }
+            policy: [
+              {
+                userAgent: "*",
+                allow: "/",
+                // disallow: ["/support/cloud-agreement/", "support/cloud-agreement-may-2020", "/thank-you"]
+              },
+            ],
+          },
+        },
+      },
     },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `assets`,
-        path: `${__dirname}/src/assets`
-      }
+        path: `${__dirname}/src/assets`,
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -64,9 +68,9 @@ module.exports = {
       resolve: `gatsby-plugin-material-ui`,
       options: {
         stylesProvider: {
-          injectFirst: true
-        }
-      }
+          injectFirst: true,
+        },
+      },
     },
     `gatsby-plugin-styled-components`,
     // `gatsby-theme-material-ui`,
@@ -77,9 +81,9 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: `transparent`,
-        theme_color: `#39C33A`
+        theme_color: `#39C33A`,
         // icon: `src/assets/icons/short-logo.svg` // This path is relative to the root of the site.
-      }
+      },
     },
     /*
      * Gatsby's data processing layer begins with “source”
@@ -90,27 +94,24 @@ module.exports = {
       options: {
         typeName: "WPGraphQL",
         fieldName: "wpgraphql",
-        url: `${process.env.WORDPRESS_URL}/graphql`
-      }
+        url: `${process.env.WORDPRESS_URL}/graphql`,
+      },
     },
 
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/
-        }
-      }
+          include: /assets/,
+        },
+      },
     },
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Roboto\:400,700`,
-          `Montserrat\:100,400,700`
-        ],
-        display: 'swap'
-      }
-    }
-  ]
+        fonts: [`Roboto\:400,700`, `Montserrat\:100,400,700`],
+        display: "swap",
+      },
+    },
+  ],
 }

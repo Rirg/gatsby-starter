@@ -2,7 +2,11 @@ import queryString from "query-string"
 import Cookies from "js-cookie"
 import { HUBSPOT_API, IPIFY_API } from "./apis/apis"
 
-export const textEllipsis = (str, maxLength, { side = "end", ellipsis = "..." } = {}) => {
+export const textEllipsis = (
+  str,
+  maxLength,
+  { side = "end", ellipsis = "..." } = {}
+) => {
   if (str.length > maxLength) {
     switch (side) {
       case "start":
@@ -15,10 +19,19 @@ export const textEllipsis = (str, maxLength, { side = "end", ellipsis = "..." } 
   return str
 }
 
-export const setFormUtmParams = (setValue) => {
+export const setFormUtmParams = setValue => {
   if (typeof window !== "undefined" && window) {
-    const parameters = window.location.search ? queryString.parse(window.location.search) : ""
-    const params = ["utm_medium", "utm_source", "utm_campaign", "utm_content", "utm_term", "utm_name"]
+    const parameters = window.location.search
+      ? queryString.parse(window.location.search)
+      : ""
+    const params = [
+      "utm_medium",
+      "utm_source",
+      "utm_campaign",
+      "utm_content",
+      "utm_term",
+      "utm_name",
+    ]
     if (parameters !== "") {
       params.map(param => {
         if (param in parameters) {
@@ -41,18 +54,19 @@ export const submitHubspotForm = async (data, portalId, formId) => {
   const pageName = isBrowser ? document.title : null
   const ipAddress = await IPIFY_API.get()
 
-  const context = ipAddress && ipAddress.data.ip ?
-    {
-      ipAddress: ipAddress.data.ip,
-      hutk,
-      pageUri,
-      pageName
-    } :
-    {
-      hutk,
-      pageUri,
-      pageName
-    }
+  const context =
+    ipAddress && ipAddress.data.ip
+      ? {
+          ipAddress: ipAddress.data.ip,
+          hutk,
+          pageUri,
+          pageName,
+        }
+      : {
+          hutk,
+          pageUri,
+          pageName,
+        }
 
   try {
     const res = await HUBSPOT_API.post(
@@ -60,13 +74,14 @@ export const submitHubspotForm = async (data, portalId, formId) => {
       JSON.stringify({
         submittedAt: Date.now(),
         fields,
-        context
+        context,
       }),
       {
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json, application/xml, text/plain, text/html, *.*"
-        }
+          Accept:
+            "application/json, application/xml, text/plain, text/html, *.*",
+        },
       }
     )
 

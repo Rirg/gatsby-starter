@@ -1,10 +1,12 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const Container = styled.div`
   position: relative;
-  padding-top: ${({paddingPercentage}) => paddingPercentage}%; /* 16:9 Aspect Ratio */
-  
-  img, .MuiSkeleton-root {
+  padding-top: ${({ paddingPercentage }) =>
+    paddingPercentage}%; /* 16:9 Aspect Ratio */
+
+  img,
+  .MuiSkeleton-root {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -16,7 +18,7 @@ export const Container = styled.div`
     object-fit: cover;
     //transform: none;
   }
-  
+
   .MuiSkeleton-root {
     z-index: 1;
   }
@@ -32,5 +34,5 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: black;
   z-index: 1;
-  opacity: .4;
+  opacity: 0.4;
 `

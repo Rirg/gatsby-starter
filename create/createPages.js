@@ -4,14 +4,18 @@ const { PageTemplateFragment } = require("../src/templates/page/page.data")
 const _uniqBy = require("lodash.uniqby")
 const _isEmpty = require("lodash.isempty")
 
-const { getAllLayoutsData, createTemplate, createPageWithTemplate } = require("./utils")
+const {
+  getAllLayoutsData,
+  createTemplate,
+  createPageWithTemplate,
+} = require("./utils")
 
 const filePathToComponents = "../src/layouts/"
 const templateCacheFolder = ".template-cache"
 const layoutMapping = require("./layouts")
 const pageTemplate = require.resolve("../src/templates/page/page.template.js")
 // ${FluidImageFragment}
-const GET_PAGES = (layouts) => `
+const GET_PAGES = layouts => `
     ${PageTemplateFragment(layouts)}
     query GET_PAGES($first:Int $after:String) {
         wpgraphql {
@@ -46,7 +50,6 @@ const itemsPerPage = 10
  * @returns {Promise<void>}
  */
 module.exports = async ({ actions, graphql, reporter }, options) => {
-
   /**
    * Get all layouts data as a concatenated string
    */
@@ -66,12 +69,11 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * @param variables
    * @returns {Promise<*>}
    */
-  const fetchPages = async (variables) =>
+  const fetchPages = async variables =>
     /**
      * Fetch pages using the GET_PAGES query and the variables passed in.
      */
     await graphql(GET_PAGES(layoutsData), variables).then(({ data }) => {
-
       /**
        * Extract the data from the GraphQL query results
        */
@@ -79,18 +81,18 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         wpgraphql: {
           pages: {
             nodes,
-            pageInfo: { hasNextPage, endCursor }
-          }
-        }
+            pageInfo: { hasNextPage, endCursor },
+          },
+        },
       } = data
 
       /**
        * Map over the pages for later creation
        */
-      nodes
-      && nodes.map((pages) => {
-        allPages.push(pages)
-      })
+      nodes &&
+        nodes.map(pages => {
+          allPages.push(pages)
+        })
 
       /**
        * If there's another page, fetch more
@@ -114,62 +116,64 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * Kick off our `fetchPages` method which will get us all
    * the pages we need to create individual pages.
    */
-  await fetchPages({ first: itemsPerPage, after: null }).then((wpPages) => {
+  await fetchPages({ first: itemsPerPage, after: null }).then(wpPages => {
+    wpPages &&
+      wpPages.map(page => {
+        let pagePath = `${page.uri}`
 
-    wpPages && wpPages.map((page) => {
-      let pagePath = `${page.uri}`
-
-      // Exclude hardcoded pages
-      if (pagePath === "/components/") return
-
-      /**
-       * If the page is the front page, the page path should not be the uri,
-       * but the root path '/'.
-       */
-      if (page.isFrontPage) {
-        pagePath = "/"
-      }
-
-      /**
-       * Filter out empty objects. This can happen, if for some reason you
-       * don't query for a specific layout (UnionType), that is potentially
-       * there.
-       */
-      const layouts = page.pageBuilder.layouts.filter(el => {
-        return !_isEmpty(el)
-      })
-
-      let mappedLayouts = []
-
-      if (layouts && layouts.length > 0) {
-        /**
-         * Removes all duplicates, as we only need to import each layout once
-         */
-        const UniqueLayouts = _uniqBy(layouts, "fieldGroupName")
+        // Exclude hardcoded pages
+        if (pagePath === "/components/") return
 
         /**
-         * Maps data and prepares object for our template generation.
+         * If the page is the front page, the page path should not be the uri,
+         * but the root path '/'.
          */
-        mappedLayouts = UniqueLayouts.map((layout) => {
-          return {
-            layoutType: layout.fieldGroupName,
-            componentName: layoutMapping[layout.fieldGroupName],
-            filePath: `${filePathToComponents + layoutMapping[layout.fieldGroupName]}/`
-          }
+        if (page.isFrontPage) {
+          pagePath = "/"
+        }
+
+        /**
+         * Filter out empty objects. This can happen, if for some reason you
+         * don't query for a specific layout (UnionType), that is potentially
+         * there.
+         */
+        const layouts = page.pageBuilder.layouts.filter(el => {
+          return !_isEmpty(el)
         })
-      }
 
-      createPageWithTemplate({
-        createTemplate: createTemplate,
-        templateCacheFolder: templateCacheFolder,
-        pageTemplate: pageTemplate,
-        page: page,
-        pagePath: pagePath,
-        mappedLayouts: mappedLayouts,
-        createPage: createPage,
-        reporter: reporter
+        let mappedLayouts = []
+
+        if (layouts && layouts.length > 0) {
+          /**
+           * Removes all duplicates, as we only need to import each layout once
+           */
+          const UniqueLayouts = _uniqBy(layouts, "fieldGroupName")
+
+          /**
+           * Maps data and prepares object for our template generation.
+           */
+          mappedLayouts = UniqueLayouts.map(layout => {
+            return {
+              layoutType: layout.fieldGroupName,
+              componentName: layoutMapping[layout.fieldGroupName],
+              filePath: `${
+                filePathToComponents + layoutMapping[layout.fieldGroupName]
+              }/`,
+            }
+          })
+        }
+
+        createPageWithTemplate({
+          createTemplate: createTemplate,
+          templateCacheFolder: templateCacheFolder,
+          pageTemplate: pageTemplate,
+          page: page,
+          pagePath: pagePath,
+          mappedLayouts: mappedLayouts,
+          createPage: createPage,
+          reporter: reporter,
+        })
       })
-    })
 
     reporter.info(`# -----> PAGES TOTAL: ${wpPages.length}`)
   })

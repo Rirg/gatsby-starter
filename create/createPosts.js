@@ -74,7 +74,6 @@ const GET_PAGES = `
     }
 `
 
-
 const allPosts = []
 let postNumber = 0
 const itemsPerPost = 10
@@ -86,7 +85,6 @@ const itemsPerPost = 10
  * @returns {Promise<void>}
  */
 module.exports = async ({ actions, graphql, reporter }, options) => {
-
   /**
    * This is the method from Gatsby that we're going
    * to use to create posts in our static site.
@@ -101,7 +99,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * @param variables
    * @returns {Promise<*>}
    */
-  const fetchPosts = async (variables) =>
+  const fetchPosts = async variables =>
     /**
      * Fetch posts using the GET_PAGES query and the variables passed in.
      */
@@ -121,10 +119,10 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
       /**
        * Map over the posts for later creation
        */
-      nodes
-      && nodes.map((posts) => {
-        allPosts.push(posts)
-      })
+      nodes &&
+        nodes.map(posts => {
+          allPosts.push(posts)
+        })
 
       /**
        * If there's another post, fetch more
@@ -148,24 +146,24 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * Kick off our `fetchPosts` method which will get us all
    * the posts we need to create individual posts.
    */
-  await fetchPosts({ first: itemsPerPost, after: null }).then((wpPosts) => {
+  await fetchPosts({ first: itemsPerPost, after: null }).then(wpPosts => {
+    wpPosts &&
+      wpPosts.map(post => {
+        /**
+         * Build post path based of theme blogURI setting.
+         */
+        const path = `blog${post.uri}`
 
-    wpPosts && wpPosts.map((post) => {
-      /**
-       * Build post path based of theme blogURI setting.
-       */
-      const path = `blog${post.uri}`
+        createPage({
+          path: path,
+          component: postTemplate,
+          context: {
+            data: post,
+          },
+        })
 
-      createPage({
-        path: path,
-        component: postTemplate,
-        context: {
-          data: post,
-        },
+        reporter.info(`post created:  ${post.uri}`)
       })
-
-      reporter.info(`post created:  ${post.uri}`)
-    })
 
     reporter.info(`# -----> POSTS TOTAL: ${wpPosts.length}`)
   })

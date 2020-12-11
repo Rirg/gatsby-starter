@@ -1,16 +1,14 @@
 // Create media files for gatsby-image
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
-exports.createResolvers = async (
-  {
-    actions,
-    cache,
-    createNodeId,
-    createResolvers,
-    store,
-    reporter,
-  },
-) => {
+exports.createResolvers = async ({
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+}) => {
   const { createNode } = actions
 
   await createResolvers({
@@ -42,8 +40,10 @@ exports.createResolvers = async (
 const createPages = require("./create/createPages")
 const createPosts = require("./create/createPosts")
 
-
-exports.createPagesStatefully = async ({ graphql, actions, reporter }, options) => {
+exports.createPagesStatefully = async (
+  { graphql, actions, reporter },
+  options
+) => {
   const { createRedirect } = actions
 
   // const redirects = [

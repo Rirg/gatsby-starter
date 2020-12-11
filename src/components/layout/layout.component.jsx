@@ -15,22 +15,19 @@ import Header from "../header/header.component"
 import Footer from "../footer/footer.component"
 
 const LayoutComponent = ({ seo, children }) => {
-
   return (
     <Theme>
-      <GlobalStyles/>
-      <SeoComponent data={seo}/>
-      <Header/>
-      <AppContainer>
-        {children}
-      </AppContainer>
+      <GlobalStyles />
+      <SeoComponent data={seo} />
+      <Header />
+      <AppContainer>{children}</AppContainer>
       <Footer />
     </Theme>
   )
 }
 
 LayoutComponent.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 export default LayoutComponent

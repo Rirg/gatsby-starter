@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import {
   createMuiTheme,
-  ThemeProvider as MuiThemeProvider
+  ThemeProvider as MuiThemeProvider,
 } from "@material-ui/core/styles"
 
 import useMediaQuery from "@material-ui/core/useMediaQuery"
@@ -32,48 +32,43 @@ const Theme = ({ children }) => {
     sectionPadding,
     fonts: {
       primaryFont: "Montserrat, sans-serif",
-      secondaryFont: "Open Sans, sans-serif"
+      secondaryFont: "Open Sans, sans-serif",
     },
     palette: {
-      primary:
-        {
-          // contrastText: "rgba(0, 0, 0, 0.87)",
-          main: "#39C33A",
-          light: "#39C33A",
-          dark: "#39C33A"
-        },
-      secondary:
-        {
-          // contrastText: "rgba(0, 0, 0, 0.87)",
-          main: "#10365A",
-          light: "#10365A",
-          dark: "#10365A"
-        },
+      primary: {
+        // contrastText: "rgba(0, 0, 0, 0.87)",
+        main: "#39C33A",
+        light: "#39C33A",
+        dark: "#39C33A",
+      },
+      secondary: {
+        // contrastText: "rgba(0, 0, 0, 0.87)",
+        main: "#10365A",
+        light: "#10365A",
+        dark: "#10365A",
+      },
       tertiary: {
-        main: "#52D6FF"
+        main: "#52D6FF",
       },
       text: {
         primary: "#10355A",
         secondary: "#10355A",
         disabled: "#10355A",
-        hint: "#10355A"
-      }
+        hint: "#10355A",
+      },
     },
     typography: {
-      "fontFamily": `"Roboto", "Open Sans", "Arial", sans-serif`
-    }
+      fontFamily: `"Roboto", "Open Sans", "Arial", sans-serif`,
+    },
   })
 
   return (
     <CssBaseline>
       <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </MuiThemeProvider>
     </CssBaseline>
   )
 }
-
 
 export default Theme
