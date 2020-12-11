@@ -29,8 +29,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: "https://www.name.com",
-        sitemap: "https://www.name.com/sitemap.xml",
+        host: "https://www.domain.com",
+        sitemap: "https://www.domain.com/sitemap.xml",
         env: {
           development: {
             policy: [{
