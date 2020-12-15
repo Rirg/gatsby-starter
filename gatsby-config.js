@@ -65,15 +65,25 @@ module.exports = {
     `gatsby-plugin-netlify`,
     `gatsby-plugin-transition-link`,
     {
-      resolve: `gatsby-plugin-material-ui`,
+      resolve: `gatsby-theme-material-ui`,
       options: {
-        stylesProvider: {
-          injectFirst: true,
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: `Roboto`,
+                variants: [`100`, `400`, `500`, `700`],
+              },
+              {
+                family: `Open Sans`,
+                variants: [`100`, `400`, `500`, `700`],
+              },
+            ],
+          },
         },
       },
     },
     `gatsby-plugin-styled-components`,
-    // `gatsby-theme-material-ui`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
