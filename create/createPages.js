@@ -122,7 +122,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         let pagePath = `${page.uri}`
 
         // Exclude hardcoded pages
-        if (pagePath === "/components/") return
+        if (pagePath === "/layouts/") return
 
         /**
          * If the page is the front page, the page path should not be the uri,
