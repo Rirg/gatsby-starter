@@ -14,6 +14,7 @@ module.exports = {
     siteUrl: `https://www.domain.com`,
   },
   plugins: [
+    `gatsby-plugin-preact`,
     `gatsby-plugin-sitemap`,
     // Make sure this plugin is first in the array of plugins
     {
