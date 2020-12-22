@@ -2,6 +2,21 @@ import queryString from "query-string"
 import Cookies from "js-cookie"
 import { HUBSPOT_API, IPIFY_API } from "./apis/apis"
 
+export const getColor = (color, theme) => {
+  switch (color) {
+    case "primary":
+      return theme.palette.primary.main
+    case "secondary":
+      return theme.palette.secondary.main
+    case "tertiary":
+      return theme.palette.tertiary.main
+    case "content":
+      return theme.palette.text.content
+    default:
+      return theme.palette.text.primary
+  }
+}
+
 export const textEllipsis = (
   str,
   maxLength,
