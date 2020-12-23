@@ -11,6 +11,12 @@ const FluidImage = ({
 }) => {
   //const altText = img && alt ? alt : img.altText
   let imageFile = ""
+  let imgAlt = alt
+
+  if (!imgAlt) {
+    imgAlt = img.altText ? img.altText : img.title
+  }
+
   if (img && img.imageFile) {
     imageFile = img.imageFile
   }
@@ -35,7 +41,7 @@ const FluidImage = ({
       <img
         className={className}
         src={data.fallBackImage.publicURL}
-        alt={"Fallback"}
+        alt={imgAlt}
         {...props}
       />
     ) : null
@@ -46,13 +52,19 @@ const FluidImage = ({
       <Img
         className={className}
         fluid={imageFile.childImageSharp.fluid}
-        alt="alt"
+        alt={imgAlt}
         {...props}
       />
     )
   }
 
-  return <img className={className} src={img.sourceUrl} alt="alt" {...props} />
+  return (
+    <img
+      className={className}
+      src={img.sourceUrl ? img.sourceUrl : img}
+      {...props}
+    />
+  )
 }
 
 export default FluidImage
