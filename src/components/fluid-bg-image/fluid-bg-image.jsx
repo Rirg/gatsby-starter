@@ -1,5 +1,6 @@
 import React from "react"
 import BackgroundImage from "gatsby-background-image"
+import PropTypes from "prop-types"
 
 const FluidBgImg = ({
   img,
@@ -8,21 +9,19 @@ const FluidBgImg = ({
   fallback,
   children,
 }) => {
+  if (!img && !fallback) return <section>{children}</section>
+
   let imageFile = ""
-  if (img && img.imageFile) {
+  if (img.imageFile) {
     imageFile = img.imageFile.childImageSharp
   }
 
-  if (img && img.childImageSharp) {
+  if (img.childImageSharp) {
     imageFile = img.childImageSharp
   }
 
   if (!img && fallback) {
     imageFile = fallback.childImageSharp
-  }
-
-  if (!imageFile && !img) {
-    return <section>{children}</section>
   }
 
   if (imageFile) {
@@ -47,4 +46,9 @@ const FluidBgImg = ({
     </section>
   )
 }
+
+FluidBgImg.propTypes = {
+  img: PropTypes.object.isRequired,
+}
+
 export default FluidBgImg

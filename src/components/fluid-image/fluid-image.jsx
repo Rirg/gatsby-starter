@@ -1,6 +1,7 @@
 import React from "react"
+import PropTypes from "prop-types"
+
 import Img from "gatsby-image"
-import { graphql, useStaticQuery } from "gatsby"
 
 const FluidImage = ({
   img,
@@ -9,6 +10,8 @@ const FluidImage = ({
   withFallback = false,
   ...props
 }) => {
+  if (!img) return null
+
   //const altText = img && alt ? alt : img.altText
   let imageFile = ""
   let imgAlt = alt
@@ -17,37 +20,15 @@ const FluidImage = ({
     imgAlt = img.altText ? img.altText : img.title
   }
 
-  if (img && img.imageFile) {
+  if (img.imageFile) {
     imageFile = img.imageFile
   }
 
-  if (img && img.childImageSharp) {
+  if (img.childImageSharp) {
     imageFile = img
   }
 
-  const data = useStaticQuery(graphql`
-    query {
-      fallbackImage: file(relativePath: { eq: "fallback.svg" }) {
-        publicURL
-      }
-    }
-  `)
-
-  /**
-   * Return fallback Image, if no Image is given.
-   */
-  if (!img) {
-    return withFallback ? (
-      <img
-        className={className}
-        src={data.fallBackImage.publicURL}
-        alt={imgAlt}
-        {...props}
-      />
-    ) : null
-  }
-
-  if (img && imageFile) {
+  if (imageFile) {
     return (
       <Img
         className={className}
@@ -65,6 +46,10 @@ const FluidImage = ({
       {...props}
     />
   )
+}
+
+FluidImage.propTypes = {
+  img: PropTypes.object.isRequired,
 }
 
 export default FluidImage
