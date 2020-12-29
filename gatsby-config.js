@@ -65,23 +65,16 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-netlify`,
     `gatsby-plugin-transition-link`,
+    `gatsby-plugin-top-layout`,
     {
-      resolve: `gatsby-theme-material-ui`,
+      resolve: "gatsby-plugin-material-ui",
+      // If you want to use styled components you should change the injection order.
       options: {
-        webFontsConfig: {
-          fonts: {
-            google: [
-              {
-                family: `Roboto`,
-                variants: [`100`, `400`, `500`, `700`],
-              },
-              {
-                family: `Open Sans`,
-                variants: [`100`, `400`, `500`, `700`],
-              },
-            ],
-          },
+        stylesProvider: {
+          injectFirst: true,
         },
+        // disableAutoprefixing: true,
+        // disableMinification: true,
       },
     },
     `gatsby-plugin-styled-components`,

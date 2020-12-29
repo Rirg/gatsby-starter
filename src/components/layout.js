@@ -10,19 +10,17 @@ import PropTypes from "prop-types"
 
 import SEO from "../components/seo/seo.component"
 import Header from "../components/header/header.component"
-import Theme from "./theme"
-import { AppContainer, GlobalStyles } from "../styles/pages/index.styles"
+import { AppContainer } from "../styles/pages/index.styles"
 import Footer from "./footer/footer.component"
 
 const Layout = ({ seo, children }) => {
   return (
-    <Theme>
-      <GlobalStyles />
+    <>
       {seo && <SEO data={seo} />}
       <Header />
       <AppContainer>{children}</AppContainer>
       <Footer />
-    </Theme>
+    </>
   )
 }
 
