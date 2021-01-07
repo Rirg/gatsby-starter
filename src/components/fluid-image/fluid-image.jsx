@@ -7,6 +7,7 @@ const FluidImage = ({
   img,
   alt,
   className,
+  placeholderStyle,
   withFallback = false,
   ...props
 }) => {
@@ -32,6 +33,7 @@ const FluidImage = ({
     return (
       <Img
         className={className}
+        placeholderStyle={placeholderStyle}
         fluid={imageFile.childImageSharp.fluid}
         alt={imgAlt}
         {...props}

@@ -110,5 +110,16 @@ module.exports = {
         },
       },
     },
+
+    // {
+    //   resolve: `gatsby-plugin-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       `DM Sans\:100,400,500,700`,
+    //       `Merriweather\:100,300,400,600,700`,
+    //     ],
+    //     display: "swap",
+    //   },
+    // },
   ],
 }
