@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 
 import SeoComponent from "../seo/seo.component"
 import Theme from "../theme"
-import { AppContainer, GlobalStyles } from "../../styles/pages/index.styles"
+import { AppContainer, GlobalStyles } from "../../styles/app.styles"
 import Header from "../header/header.component"
 import Footer from "../footer/footer.component"
 

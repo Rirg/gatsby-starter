@@ -7,7 +7,7 @@ import theme from "../../src/theme"
 
 import useMediaQuery from "@material-ui/core/useMediaQuery"
 import { ThemeProvider } from "styled-components"
-import { GlobalStyles } from "../../src/styles/pages/index.styles"
+import { GlobalStyles } from "../../src/styles/app.styles"
 
 export default function TopLayout(props) {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {

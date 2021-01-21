@@ -46,7 +46,7 @@ module.exports = {
               {
                 userAgent: "*",
                 allow: "/",
-                // disallow: ["/support/cloud-agreement/", "support/cloud-agreement-may-2020", "/thank-you"]
+                disallow: ["/layouts"],
               },
             ],
           },
