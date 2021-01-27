@@ -52,13 +52,12 @@ function SEO({ data, meta }) {
       {/* General tags */}
       {metaDesc && <meta name="description" content={metaDesc} />}
 
-      {metaRobotsNoindex ||
-        (metaRobotsNofollow && (
-          <meta
-            name="robots"
-            content={`${metaRobotsNoindex}, ${metaRobotsNofollow}`}
-          />
-        ))}
+      {metaRobotsNoindex && (
+        <meta
+          name="robots"
+          content={`${metaRobotsNoindex}, ${metaRobotsNofollow}`}
+        />
+      )}
 
       {canonical && <link rel="canonical" href={canonical} />}
 
