@@ -165,13 +165,6 @@ const wordpress = css`
 `
 
 export const GlobalStyles = createGlobalStyle`
-  body {
-    font-family: ${({ theme }) => theme.fonts.primaryFont};
-    // Remove default behaviour from MUI when opening menu
-    //overflow: unset !important;
-    //padding: 0 !important;
-  }
-
   img, svg {
     max-width: 100%;
   }
