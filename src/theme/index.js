@@ -4,8 +4,8 @@ const theme = createMuiTheme({
   navHeight: 74,
   sectionPadding: "padding-top: 1.5em; padding-bottom: 1.5em;",
   fonts: {
-    primaryFont: "Raleway, sans-serif",
-    secondaryFont: "Raleway, sans-serif",
+    primary: "Raleway, sans-serif",
+    secondary: "Raleway, sans-serif",
   },
   layout: {
     contentWidth: 1236,
