@@ -1,13 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
-
-import Img from "gatsby-image"
+import * as S from "./fluid-image.styles"
 
 const FluidImage = ({
   img,
   alt,
   className,
   placeholderStyle,
+  arPaddingPercentage,
   withFallback = false,
   ...props
 }) => {
@@ -31,7 +31,8 @@ const FluidImage = ({
 
   if (imageFile) {
     return (
-      <Img
+      <S.CustomImage
+        paddingpercentage={arPaddingPercentage}
         className={className}
         placeholderStyle={placeholderStyle}
         fluid={imageFile.childImageSharp.fluid}
@@ -52,6 +53,7 @@ const FluidImage = ({
 
 FluidImage.propTypes = {
   img: PropTypes.object.isRequired,
+  arPaddingPercentage: PropTypes.number,
 }
 
 export default FluidImage
