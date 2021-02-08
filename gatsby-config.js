@@ -13,6 +13,13 @@ module.exports = {
   siteMetadata: {
     siteUrl: `https://www.domain.com`,
   },
+  flags: {
+    // FAST_DEV: true,
+    DEV_SSR: false,
+    QUERY_ON_DEMAND: true,
+    FAST_REFRESH: true,
+    LAZY_IMAGES: true,
+  },
   plugins: [
     // `gatsby-plugin-preact`,
     `gatsby-plugin-sitemap`,
@@ -78,17 +85,17 @@ module.exports = {
       },
     },
     `gatsby-plugin-styled-components`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `transparent`,
-        theme_color: `#39C33A`,
-        // icon: `src/assets/icons/short-logo.svg` // This path is relative to the root of the site.
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-manifest`,
+    //   options: {
+    //     name: `gatsby-starter-default`,
+    //     short_name: `starter`,
+    //     start_url: `/`,
+    //     background_color: `transparent`,
+    //     theme_color: `#39C33A`,
+    //     // icon: `src/assets/icons/short-logo.svg` // This path is relative to the root of the site.
+    //   },
+    // },
     /*
      * Gatsby's data processing layer begins with “source”
      * plugins. Here the site sources its data from WordPress.

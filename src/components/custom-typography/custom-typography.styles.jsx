@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Typography } from "@material-ui/core"
-import { getColor } from "../utils"
+import { getColor } from "../../utils"
 
 export const Text = styled(Typography)`
   color: ${({ theme, colorInherit, color }) =>
