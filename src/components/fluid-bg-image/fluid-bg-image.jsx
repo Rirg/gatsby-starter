@@ -16,6 +16,10 @@ const FluidBgImg = ({
     imageFile = img.imageFile.childImageSharp
   }
 
+  if (img && img.localFile) {
+    imageFile = img.localFile.childImageSharp
+  }
+
   if (img.childImageSharp) {
     imageFile = img.childImageSharp
   }

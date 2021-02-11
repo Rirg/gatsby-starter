@@ -5,12 +5,13 @@ const GET_PAGES = `
             allWpPost {
                 nodes {                
                     title
-                    postId
+                    id
+                    date
                     content
                     featuredImage {
                       node {
                         sourceUrl
-                        imageFile {
+                        localFile {
                           childImageSharp {
                             fluid(maxWidth: 1200) {
                               base64
@@ -18,13 +19,13 @@ const GET_PAGES = `
                               src
                               srcSet
                               sizes
+                              srcWebp
                             }
                           }
                         }
                       }
                     }
-                    seo {
-                      cornerstone
+                    seo {                     
                       canonical
                       title
                       focuskw

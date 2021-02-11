@@ -25,6 +25,10 @@ const FluidImage = ({
     imageFile = img.imageFile
   }
 
+  if (img.localFile) {
+    imageFile = img.localFile
+  }
+
   if (img.childImageSharp) {
     imageFile = img
   }
