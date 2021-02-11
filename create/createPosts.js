@@ -1,20 +1,8 @@
 const postTemplate = require.resolve("../src/templates/post/post.template.jsx")
 
 const GET_PAGES = `
-    query GET_POSTS($first:Int $after:String) {
-        wpgraphql {
-            posts(
-                first: $first
-                after: $after
-                # This will make sure to only get the parent nodes and no children
-                where: {
-                    parent: null
-                }
-            ) {
-                pageInfo {
-                    hasNextPage
-                    endCursor
-                }
+    query GET_POSTS {
+            allWpPost {
                 nodes {                
                     title
                     postId
@@ -70,13 +58,10 @@ const GET_PAGES = `
                     uri
                 }
             }
-        }
     }
 `
 
 const allPosts = []
-let postNumber = 0
-const itemsPerPost = 10
 
 /**
  * This is the export which Gatbsy will use to process.
@@ -108,12 +93,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
        * Extract the data from the GraphQL query results
        */
       const {
-        wpgraphql: {
-          posts: {
-            nodes,
-            pageInfo: { hasNextPage, endCursor },
-          },
-        },
+        allWpPost: { nodes },
       } = data
 
       /**
@@ -123,16 +103,6 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         nodes.map(posts => {
           allPosts.push(posts)
         })
-
-      /**
-       * If there's another post, fetch more
-       * so we can have all the data we need.
-       */
-      if (hasNextPage) {
-        postNumber++
-        reporter.info(`fetch post ${postNumber} of posts...`)
-        return fetchPosts({ first: itemsPerPost, after: endCursor })
-      }
 
       /**
        * Once we're done, return all the posts
@@ -146,7 +116,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * Kick off our `fetchPosts` method which will get us all
    * the posts we need to create individual posts.
    */
-  await fetchPosts({ first: itemsPerPost, after: null }).then(wpPosts => {
+  await fetchPosts().then(wpPosts => {
     wpPosts &&
       wpPosts.map(post => {
         /**

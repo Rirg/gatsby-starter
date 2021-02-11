@@ -1,5 +1,5 @@
-const PageTemplateFragment = (layouts) => `
-    fragment PageTemplateFragment on WPGraphQL_Page {
+const PageTemplateFragment = layouts => `
+    fragment PageTemplateFragment on WpPage {
         id
         isFrontPage
         title

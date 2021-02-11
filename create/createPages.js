@@ -17,31 +17,17 @@ const pageTemplate = require.resolve("../src/templates/page/page.template.js")
 // ${FluidImageFragment}
 const GET_PAGES = layouts => `
     ${PageTemplateFragment(layouts)}
-    query GET_PAGES($first:Int $after:String) {
-        wpgraphql {
-            pages(
-                first: $first
-                after: $after
-                # This will make sure to only get the parent nodes and no children
-                where: {
-                    parent: null
-                }
-            ) {
-                pageInfo {
-                    hasNextPage
-                    endCursor
-                }
-                nodes {
-                  ...PageTemplateFragment
-                }
-            }
-        }
+    query GET_PAGES {
+          allWpPage {
+              nodes {
+                ...PageTemplateFragment
+              }
+          }
+        
     }
 `
 
 const allPages = []
-let pageNumber = 0
-const itemsPerPage = 10
 
 /**
  * This is the export which Gatbsy will use to process.
@@ -78,12 +64,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
        * Extract the data from the GraphQL query results
        */
       const {
-        wpgraphql: {
-          pages: {
-            nodes,
-            pageInfo: { hasNextPage, endCursor },
-          },
-        },
+        allWpPage: { nodes },
       } = data
 
       /**
@@ -93,16 +74,6 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         nodes.map(pages => {
           allPages.push(pages)
         })
-
-      /**
-       * If there's another page, fetch more
-       * so we can have all the data we need.
-       */
-      if (hasNextPage) {
-        pageNumber++
-        reporter.info(`fetch page ${pageNumber} of pages...`)
-        return fetchPages({ first: itemsPerPage, after: endCursor })
-      }
 
       /**
        * Once we're done, return all the pages
@@ -116,7 +87,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * Kick off our `fetchPages` method which will get us all
    * the pages we need to create individual pages.
    */
-  await fetchPages({ first: itemsPerPage, after: null }).then(wpPages => {
+  await fetchPages().then(wpPages => {
     wpPages &&
       wpPages.map(page => {
         let pagePath = `${page.uri}`

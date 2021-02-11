@@ -101,10 +101,12 @@ module.exports = {
      * plugins. Here the site sources its data from WordPress.
      */
     {
-      resolve: "gatsby-source-graphql",
+      resolve: `gatsby-source-wordpress`,
       options: {
-        typeName: "WPGraphQL",
-        fieldName: "wpgraphql",
+        /*
+         * The full URL of the WordPress site's GraphQL API.
+         * Example : 'https://www.example-site.com/graphql'
+         */
         url: `${process.env.WORDPRESS_URL}/graphql`,
       },
     },
