@@ -2,6 +2,19 @@ import queryString from "query-string"
 import Cookies from "js-cookie"
 import { HUBSPOT_API, IPIFY_API } from "./apis/apis"
 
+export const getLocalStorageItem = key => {
+  if (typeof window !== "undefined" && window) {
+    return window.localStorage.getItem(key)
+  }
+  return null
+}
+
+export const setLocalStorageItem = (key, value) => {
+  if (typeof window !== "undefined" && window) {
+    window.localStorage.setItem(key, value)
+  }
+}
+
 export const getColor = (color, theme) => {
   switch (color) {
     case "primary":
