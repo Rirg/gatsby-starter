@@ -15,10 +15,10 @@ module.exports = {
   },
   flags: {
     // FAST_DEV: true,
-    DEV_SSR: false,
-    QUERY_ON_DEMAND: true,
-    FAST_REFRESH: true,
-    LAZY_IMAGES: true,
+    // DEV_SSR: false,
+    // QUERY_ON_DEMAND: true,
+    // FAST_REFRESH: true,
+    // LAZY_IMAGES: true,
   },
   plugins: [
     // `gatsby-plugin-preact`,
