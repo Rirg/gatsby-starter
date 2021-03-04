@@ -33,13 +33,17 @@ const FluidImage = ({
     imageFile = img
   }
 
+  if (img.file) {
+    imageFile = img.file
+  }
+
   if (imageFile) {
     return (
       <S.CustomImage
         paddingpercentage={arPaddingPercentage}
         className={className}
         placeholderStyle={placeholderStyle}
-        fluid={imageFile.childImageSharp.fluid}
+        image={imageFile.childImageSharp.gatsbyImageData}
         alt={imgAlt}
         {...props}
       />

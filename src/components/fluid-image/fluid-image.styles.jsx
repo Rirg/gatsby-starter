@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
-export const CustomImage = styled(Img)`
+export const CustomImage = styled(GatsbyImage)`
   ${({ paddingpercentage }) =>
     paddingpercentage
       ? `
