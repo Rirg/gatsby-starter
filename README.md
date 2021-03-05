@@ -25,8 +25,7 @@
 ## Libraries
 
 1.  **`material-ui`**: CSS framework
-2.  **`gatsby-image`**: Handle lazy loading / resize images / WebP - etc.
-3.  **`gatsby-background-image`**: Handle lazy loading / resize images / WebP (backgrounds) - etc.
+2.  **`gatsby-plugin-image`**: Handle lazy loading / resize images / WebP - etc.
 4.  **`gatsby-pagination`**: Handle pagination
 5.  **`styled-components`**: CSS-in-JS
 6.  **`react-modal-video`** Open YouTube - Vimeo or local videos in a modal - popup
