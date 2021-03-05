@@ -1,22 +1,25 @@
 import styled from "styled-components"
-import { GatsbyImage } from "gatsby-plugin-image"
 
-export const CustomImage = styled(GatsbyImage)`
+export const Wrapper = styled.div`
+  .gatsby-image-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+  }
   ${({ paddingpercentage }) =>
     paddingpercentage
       ? `
-   
+    height: auto !important;
     position: relative;
     padding-top: ${paddingpercentage}%; /* 16:9 Aspect Ratio */
 
-  > div {
-    padding-bottom: 0 !important;
-  }
+  // > div {
+  //   padding-bottom: 0 !important;
+  // }
   
-    img {
+    .gatsby-image-wrapper {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       top: 0;
       left: 0;
       right: 0;
