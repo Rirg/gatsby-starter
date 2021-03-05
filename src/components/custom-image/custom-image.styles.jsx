@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
       ? `
     height: auto !important;
     position: relative;
-    padding-top: ${paddingpercentage}%; /* 16:9 Aspect Ratio */
+    padding-top: ${paddingpercentage}%; 
 
   // > div {
   //   padding-bottom: 0 !important;
@@ -18,8 +18,6 @@ export const Wrapper = styled.div`
   
     .gatsby-image-wrapper {
       position: absolute;
-      width: 100% !important;
-      height: 100% !important;
       top: 0;
       left: 0;
       right: 0;
