@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import * as S from "./custom-image.styles"
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const CustomImage = ({
   img,
@@ -32,23 +32,16 @@ const CustomImage = ({
   if (image) {
     return (
       <S.Wrapper paddingpercentage={arPaddingPercentage} className={className}>
-        <GatsbyImage
-          placeholderStyle={placeholderStyle}
-          image={image}
-          alt={imgAlt}
-          {...props}
-        />
+        <GatsbyImage image={image} alt={imgAlt} {...props} />
       </S.Wrapper>
     )
   }
 
-  return (
-    <StaticImage
-      className={className}
-      src={img.sourceUrl ? img.sourceUrl : img}
-      {...props}
-    />
-  )
+  if (img.sourceUrl || typeof img === "string" || img instanceof String) {
+    return (
+      <img src={img.sourceUrl ? img.sourceUrl : img} alt={alt} {...props} />
+    )
+  }
 }
 
 CustomImage.propTypes = {
@@ -56,4 +49,4 @@ CustomImage.propTypes = {
   arPaddingPercentage: PropTypes.number,
 }
 
-export default FluidImage
+export default CustomImage
