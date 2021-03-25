@@ -23,6 +23,7 @@ module.exports = {
   plugins: [
     // `gatsby-plugin-preact`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-gatsby-cloud`,
     // Make sure this plugin is first in the array of plugins
     {
       resolve: `gatsby-plugin-google-analytics`,
@@ -33,7 +34,6 @@ module.exports = {
         // other options
       },
     },
-    `gatsby-plugin-netlify`,
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
