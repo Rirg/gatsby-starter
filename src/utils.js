@@ -1,6 +1,7 @@
 import queryString from "query-string"
 import Cookies from "js-cookie"
-import { HUBSPOT_API, IPIFY_API } from "./apis/apis"
+import { gravityFormsApi, HUBSPOT_API, IPIFY_API } from "./apis/apis"
+import CryptoJS from "crypto-js"
 
 export const getLocalStorageItem = key => {
   if (typeof window !== "undefined" && window) {
@@ -115,6 +116,49 @@ export const submitHubspotForm = async (data, portalId, formId) => {
 
     return res
   } catch (e) {
-    return null
+    return e.response
   }
+}
+
+const calculateSignature = (stringToSign, privateKey) => {
+  const hash = CryptoJS.HmacSHA1(stringToSign, privateKey)
+  const base64 = hash.toString(CryptoJS.enc.Base64)
+  return encodeURIComponent(base64)
+}
+
+export const submitGravityForm = (data, formId) => {
+  const d = new Date(),
+    expiration = 3600,
+    unixtime = parseInt(d.getTime() / 1000),
+    future_unixtime = unixtime + expiration,
+    publicKey = process.env.GF_PUB_KEY,
+    privateKey = process.env.GF_PRIV_KEY,
+    method = "POST",
+    route = `forms/${formId}/submissions`,
+    stringToSign =
+      publicKey + ":" + method + ":" + route + ":" + future_unixtime,
+    sig = calculateSignature(stringToSign, privateKey)
+
+  const uri =
+    route +
+    "?api_key=" +
+    publicKey +
+    "&signature=" +
+    sig +
+    "&expires=" +
+    future_unixtime
+
+  const values = {
+    input_values: {
+      data,
+    },
+  }
+
+  return gravityFormsApi
+    .post(uri, values, {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(response => {
+      return response
+    })
 }
