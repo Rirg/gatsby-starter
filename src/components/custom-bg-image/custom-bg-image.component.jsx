@@ -1,9 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
-import * as S from "./gatsby-bg-image.styles"
+import * as S from "./custom-bg-image.styles"
 import { GatsbyImage } from "gatsby-plugin-image"
 
-const GatsbyBgImage = props => {
+const CustomBgImage = props => {
   const { img, tag, fallback, children, ...otherProps } = props
 
   let image = ""
@@ -33,9 +33,9 @@ const GatsbyBgImage = props => {
   )
 }
 
-GatsbyBgImage.propTypes = {
+CustomBgImage.propTypes = {
   img: PropTypes.object.isRequired,
   tag: PropTypes.string,
 }
 
-export default GatsbyBgImage
+export default CustomBgImage
