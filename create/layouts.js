@@ -1,3 +1,3 @@
 module.exports = {
-  page_Pagebuilder_Layouts_MiscContent: "MiscContent",
+  Page_Pagebuilder_Layouts_MiscContent: "MiscContent",
 }

@@ -17,8 +17,8 @@ const AllLayouts = ({ layoutData }) => {
    * Mapping the fieldGroupName(s) to our components
    */
   const layouts = {
-    page_Pagebuilder_Layouts_MiscContent: MiscContent,
-    page_default: Default,
+    Page_Pagebuilder_Layouts_MiscContent: MiscContent,
+    Page_default: Default,
   }
 
   /**
@@ -26,7 +26,7 @@ const AllLayouts = ({ layoutData }) => {
    */
   const ComponentTag = layouts[layoutType]
     ? layouts[layoutType]
-    : layouts["page_default"]
+    : layouts["Page_default"]
 
   return <ComponentTag {...layoutData} />
 }
