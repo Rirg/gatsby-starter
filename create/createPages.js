@@ -108,9 +108,11 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
          * don't query for a specific layout (UnionType), that is potentially
          * there.
          */
-        const layouts = page.pageBuilder.layouts.filter(el => {
-          return !_isEmpty(el)
-        })
+        const layouts = page.pageBuilder.layouts
+          ? page.pageBuilder.layouts.filter(el => {
+              return !_isEmpty(el)
+            })
+          : null
 
         let mappedLayouts = []
 
