@@ -6,6 +6,10 @@ import { GatsbyImage } from "gatsby-plugin-image"
 const CustomBgImage = props => {
   const { img, tag, fallback, children, ...otherProps } = props
 
+  if (!img) {
+    return <section {...props}>{children}</section>
+  }
+
   let image = ""
 
   if (img.localFile) {
