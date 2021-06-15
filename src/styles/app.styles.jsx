@@ -197,6 +197,14 @@ export const GlobalStyles = createGlobalStyle`
   ${snipcart}
 `
 
+export const LayoutTitle = styled.h2`
+  background-color: yellow;
+  color: black;
+  font-size: 2.5rem;
+  font-style: italic;
+  text-align: center;
+`
+
 export const AppContainer = styled.main`
   position: relative;
   display: flex;
