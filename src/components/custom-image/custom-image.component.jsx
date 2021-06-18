@@ -39,7 +39,13 @@ const CustomImage = ({
 
   if (img.sourceUrl || typeof img === "string" || img instanceof String) {
     return (
-      <img src={img.sourceUrl ? img.sourceUrl : img} alt={alt} {...props} />
+      <S.Wrapper
+        paddingpercentage={arPaddingPercentage}
+        className={className}
+        {...props}
+      >
+        <img src={img.sourceUrl ? img.sourceUrl : img} alt={alt} />
+      </S.Wrapper>
     )
   }
 }
