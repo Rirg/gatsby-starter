@@ -1,42 +1,72 @@
-module.exports = (imports) => {
-  return`
-// This is a temporary generated file. Changes to this file will be overwritten eventually!
 import React from "react"
-import Layout from "../src/components/layout"
+import { graphql } from "gatsby"
+import Layout from "../../components/layout"
+import getLayout from "../../get-layout-util"
 
-// Sections
-${imports.map(({ componentName, filePath }) => `import ${componentName} from '${filePath}';`).join('\n')}
-
-const Page = ({ pageContext }) => {
-  const {
-    page: { seo, pageBuilder, title, parentId },
-  } = pageContext
-
+export const query = graphql`
+  query PageQuery($id: String!) {
+    wpPage(id: { eq: $id }) {
+      id
+      isFrontPage
+      title
+      content
+      uri
+      slug
+      parentId
+      seo {
+        canonical
+        title
+        focuskw
+        metaDesc
+        metaKeywords
+        metaRobotsNofollow
+        metaRobotsNoindex
+        opengraphAuthor
+        opengraphDescription
+        opengraphModifiedTime
+        opengraphImage {
+          altText
+          sourceUrl
+          title
+        }
+        opengraphPublishedTime
+        opengraphPublisher
+        opengraphSiteName
+        opengraphTitle
+        opengraphType
+        opengraphUrl
+        twitterDescription
+        twitterTitle
+        twitterImage {
+          altText
+          sourceUrl
+          title
+        }
+      }
+      pageBuilder {
+        layouts {
+          ... on WpPage_Pagebuilder_Layouts_MiscContent {
+            ...MiscContent
+          }
+        }
+        pageConfiguration {
+          hideFooter
+          hideHeaderItems
+          isTransparent
+          footerBackground
+        }
+      }
+    }
+  }
+`
+const PageTemplate = ({ data }) => {
+  const { seo, slug, pageBuilder, title } = data.wpPage
   const layouts = pageBuilder.layouts || []
-
   return (
     <Layout {...pageBuilder.pageConfiguration} seo={seo}>
-      {
-        layouts.map((layout, index) => {
-          ${imports.map(({ componentName, layoutType }) => {
-            return `
-              if (layout.fieldGroupName === '${layoutType}') {
-                  return <${componentName} 
-                  {...layout} 
-                    pageTitle={title}
-                     parentId={parentId}
-                    key={layout.fieldGroupName + index}
-                  />;
-              }
-            `
-            }).join('\n')}
-        })
-      }
-
+      {layouts.map(layout => getLayout(layout))}
     </Layout>
   )
 }
 
-export default Page
-  `
-}
+export default PageTemplate
