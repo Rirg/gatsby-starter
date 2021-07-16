@@ -25,9 +25,22 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
   `)
   const pageTemplate = path.resolve(`./src/templates/page/page.template.jsx`)
   allPages.forEach(page => {
+    let pagePath = `${page.uri}`
+
+    // Exclude hardcoded pages
+    if (pagePath === "/layouts/") return
+
+    /**
+     * If the page is the front page, the page path should not be the uri,
+     * but the root path '/'.
+     */
+    if (page.isFrontPage) {
+      pagePath = "/"
+    }
+
     createPage({
       // will be the url for the page
-      path: page.uri,
+      path: pagePath,
       // specify the component template of your choice
       component: slash(pageTemplate),
       // In the ^template's GraphQL query, 'id' will be available
