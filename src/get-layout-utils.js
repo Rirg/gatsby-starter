@@ -1,7 +1,7 @@
 import React from "react"
 import MiscContent from "./layouts/MiscContent"
 
-const getLayout = layout => {
+export const getPageLayout = layout => {
   const layoutName = layout?.fieldGroupName?.split("_").pop().trim()
   if (!layoutName) return null
   switch (layoutName) {
@@ -9,5 +9,3 @@ const getLayout = layout => {
       return <MiscContent {...layout} />
   }
 }
-
-export default getLayout

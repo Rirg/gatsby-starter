@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../../components/layout"
-import getLayout from "../../get-layout-util"
+import { getPageLayout } from "../../get-layout-utils"
 
 export const query = graphql`
   query PageQuery($id: String!) {
@@ -64,7 +64,7 @@ const PageTemplate = ({ data }) => {
   const layouts = pageBuilder.layouts || []
   return (
     <Layout {...pageBuilder.pageConfiguration} seo={seo}>
-      {layouts.map(layout => getLayout(layout))}
+      {layouts.map(layout => getPageLayout(layout))}
     </Layout>
   )
 }
