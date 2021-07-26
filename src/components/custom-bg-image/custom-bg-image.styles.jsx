@@ -6,11 +6,11 @@ export const Wrapper = styled(Box)`
   overflow: hidden;
   z-index: 1;
 
-  .gatsby-image-wrapper {
+  > .gatsby-image-wrapper {
     width: 100% !important;
     height: 100% !important;
     z-index: -1;
-    position: absolute;
+    position: absolute !important;
     top: 50%;
     transform: translateY(-50%);
   }
