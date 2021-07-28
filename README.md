@@ -4,7 +4,7 @@
 
 1.  **Start developing.**
 
-    Create a file in the root called `.env.development`!!!
+    Create a file in the root called `.env.development` with corresponding WORDPRESS_URL
 
     Navigate into your new site’s directory and start it up.
 
@@ -29,6 +29,8 @@
 4.  **`gatsby-pagination`**: Handle pagination
 5.  **`styled-components`**: CSS-in-JS
 6.  **`react-modal-video`** Open YouTube - Vimeo or local videos in a modal - popup
-7.  **`react-slick`**: Carousel - Slider
+7.  **`swiper`**: Carousel - Slider
+8.  **`html-react-parser`**: Parse HTML from string (validate to prevent errors)
+9.  **`gatsby-plugin-transition-link`**: Add transitions when changing between pages
 
 <!-- AUTO-GENERATED-CONTENT:END -->
