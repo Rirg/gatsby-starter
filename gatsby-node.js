@@ -2,10 +2,7 @@
 const createPages = require("./create/createPages")
 const createPosts = require("./create/createPosts")
 
-exports.createPagesStatefully = async (
-  { graphql, actions, reporter },
-  options
-) => {
+exports.createPages = async ({ graphql, actions, reporter }, options) => {
   const { createRedirect } = actions
 
   // const redirects = [
