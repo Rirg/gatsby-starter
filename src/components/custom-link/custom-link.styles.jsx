@@ -5,13 +5,14 @@ import AniLink from "gatsby-plugin-transition-link/AniLink"
 const styledLink = css`
   text-decoration: none;
   cursor: pointer;
+  color: inherit;
 `
 
-export const CustomLink = styled(Link)`
+export const CustomRegularLink = styled.a`
   ${styledLink};
 `
 
-export const CustomRegularLink = styled(Link)`
+export const CustomLink = styled(Link)`
   ${styledLink};
 `
 
