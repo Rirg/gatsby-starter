@@ -23,7 +23,11 @@ export default function TopLayout(props) {
 
   return (
     <React.Fragment>
-      <Helmet>
+      <Helmet
+        htmlAttributes={{
+          lang: "en-US",
+        }}
+      >
         {/*<link*/}
         {/*  href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;500;600&display=swap"*/}
         {/*  rel="stylesheet"*/}
