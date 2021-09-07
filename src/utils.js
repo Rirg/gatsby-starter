@@ -3,15 +3,17 @@ import Cookies from "js-cookie"
 import { gravityFormsApi, HUBSPOT_API, IPIFY_API } from "./apis/apis"
 import CryptoJS from "crypto-js"
 
+export const isBrowser = () => typeof window !== "undefined"
+
 export const getLocalStorageItem = key => {
-  if (typeof window !== "undefined" && window) {
+  if (isBrowser()) {
     return window.localStorage.getItem(key)
   }
   return null
 }
 
 export const setLocalStorageItem = (key, value) => {
-  if (typeof window !== "undefined" && window) {
+  if (isBrowser()) {
     window.localStorage.setItem(key, value)
   }
 }
