@@ -13,20 +13,20 @@ const CustomLink = ({ url, children, ...otherProps }) => {
   if (internal) {
     if (file) {
       return (
-        <S.CustomLink
-          to={url}
-          partiallyActive={true}
-          activeClassName="active"
-          {...otherProps}
-        >
+       <S.CustomRegularLink href={url} {...otherProps}>
           {children}
-        </S.CustomLink>
+        </S.CustomRegularLink>
       )
     }
     return (
-      <S.CustomRegularLink href={url} {...otherProps}>
+     <S.CustomLink
+        partiallyActive={true}
+        activeClassName="active"
+        to={url}
+        {...otherProps}
+      >
         {children}
-      </S.CustomRegularLink>
+      </S.CustomLink>
     )
   }
 
