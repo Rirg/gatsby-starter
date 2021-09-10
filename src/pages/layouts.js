@@ -7,7 +7,7 @@ const Layouts = () => {
   return (
     <>
       <Helmet>
-        <meta name={`robots`} content={`noindex, nofollow`} />
+        <meta name="robots" content="noindex">
       </Helmet>
       <Layout seo={{ title: "Layouts - ONLY FOR DEV" }}>
         <LayoutTitle>MiscContent</LayoutTitle>
