@@ -34,6 +34,7 @@ function SEO({ data, meta }) {
     openGraphAuthor,
   } = data
 
+  // TODO replace with domain before going live
   const schemaOrgJSONLD = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -52,11 +53,13 @@ function SEO({ data, meta }) {
       {/* General tags */}
       {metaDesc && <meta name="description" content={metaDesc} />}
 
-      {metaRobotsNoindex && (
+      {process.env.GATSBY_ACTIVE_ENV === "production" && metaRobotsNoindex ? (
         <meta
           name="robots"
           content={`${metaRobotsNoindex}, ${metaRobotsNofollow}`}
         />
+      ) : (
+        <meta name="robots" content="noindex" />
       )}
 
       {canonical && <link rel="canonical" href={canonical} />}
