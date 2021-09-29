@@ -9,7 +9,6 @@ const NotFoundPage = () => (
       style={{ textAlign: "center", paddingTop: "10em", paddingBottom: "10em" }}
     >
       <h1>NOT FOUND</h1>
-      <p>You just hit a route that doesn't exist... the sadness.</p>
     </Container>
   </Layout>
 )
