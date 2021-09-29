@@ -1,13 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
-import { CssBaseline, Paper } from "@material-ui/core"
-import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles"
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles"
 import theme from "../../src/theme"
 
-import useMediaQuery from "@material-ui/core/useMediaQuery"
-import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "../../src/styles/app.styles"
+import { CssBaseline, Paper, useMediaQuery } from "@mui/material"
 
 export default function TopLayout(props) {
   const isMd = useMediaQuery(theme.breakpoints.up("md"), {
@@ -34,12 +32,12 @@ export default function TopLayout(props) {
         {/*/>*/}
       </Helmet>
       <MuiThemeProvider theme={{ ...theme, navHeight, sectionPadding }}>
-        <ThemeProvider theme={{ ...theme, navHeight, sectionPadding }}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <GlobalStyles />
-          <Paper elevation={0}>{props.children}</Paper>
-        </ThemeProvider>
+        {/*<ThemeProvider theme={{ ...theme, navHeight, sectionPadding }}>*/}
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <GlobalStyles />
+        <Paper elevation={0}>{props.children}</Paper>
+        {/*</ThemeProvider>*/}
       </MuiThemeProvider>
     </React.Fragment>
   )

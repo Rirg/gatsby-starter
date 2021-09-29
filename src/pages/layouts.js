@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import MiscContent from "../layouts/MiscContent"
 import { LayoutTitle } from "../styles/app.styles"
+import CustomButton from "../components/custom-button/custom-button.component"
 
 const Layouts = () => {
   return (

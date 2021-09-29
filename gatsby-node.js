@@ -1,3 +1,13 @@
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "@mui/styled-engine": "@mui/styled-engine-sc",
+      },
+    },
+  })
+}
+
 // Create all pages
 const createPages = require("./create/createPages")
 const createPosts = require("./create/createPosts")

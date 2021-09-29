@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Box } from "@material-ui/core"
+import Box from "@mui/system/Box"
 
 export const Wrapper = styled(Box)`
   position: relative;

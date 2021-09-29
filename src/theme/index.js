@@ -1,11 +1,11 @@
-import { createTheme } from "@material-ui/core/styles"
+import { createTheme } from "@mui/material/styles"
 
 const theme = createTheme({
   navHeight: 74,
   sectionPadding: "padding-top: 1.5em; padding-bottom: 1.5em;",
   fonts: {
-    primary: "Raleway, sans-serif",
-    secondary: "Raleway, sans-serif",
+    primary: "Roboto, sans-serif",
+    secondary: "Roboto, sans-serif",
   },
   layout: {
     contentWidth: 1236,
@@ -41,7 +41,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: `"Raleway", "Open Sans", "Arial", sans-serif`,
+    fontFamily: `"Roboto", "Open Sans", "Arial", sans-serif`,
   },
 })
 export default theme

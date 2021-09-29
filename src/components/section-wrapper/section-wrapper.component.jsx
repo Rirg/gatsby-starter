@@ -1,7 +1,7 @@
 import React from "react"
 import * as S from "./section-wrapper.styles.jsx"
 import PropTypes from "prop-types"
-import Container from "@material-ui/core/Container"
+import Container from "@mui/material/Container"
 
 const SectionWrapper = ({ children, className, bg, contained, maxWidth }) => (
   <S.Wrapper className={`sectionWrapper ${className}`} bg={bg}>

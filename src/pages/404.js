@@ -1,7 +1,7 @@
 import React from "react"
 
 import Layout from "../components/layout"
-import Container from "@material-ui/core/Container"
+import Container from "@mui/material/Container"
 
 const NotFoundPage = () => (
   <Layout seo={{ title: "404: Not Found" }}>
