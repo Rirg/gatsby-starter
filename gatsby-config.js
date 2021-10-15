@@ -79,16 +79,23 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-transition-link`,
-    `gatsby-plugin-top-layout`,
     {
-      resolve: "gatsby-plugin-material-ui",
-      // If you want to use styled components you should change the injection order.
+      resolve: `gatsby-theme-material-ui`,
       options: {
-        stylesProvider: {
-          injectFirst: true,
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: `DM Sans`,
+                variants: [`400`, `500`, `700`],
+              },
+              {
+                family: `Bebas Neue`,
+                variants: [`400`, `500`, `700`],
+              },
+            ],
+          },
         },
-        // disableAutoprefixing: true,
-        // disableMinification: true,
       },
     },
     `gatsby-plugin-styled-components`,
