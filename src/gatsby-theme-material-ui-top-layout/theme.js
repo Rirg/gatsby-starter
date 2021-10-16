@@ -1,8 +1,6 @@
 import { createTheme } from "@mui/material/styles"
 
-let theme = createTheme()
-
-theme = createTheme(theme, {
+const theme = createTheme({
   navHeight: 74,
   sectionPadding: "padding-top: 1.5em; padding-bottom: 1.5em;",
   fonts: {
